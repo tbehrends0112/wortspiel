@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Wortspiel</title>
+
+  <!-- Installierbar als App (Android, iPhone, iPad) -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0b57d0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Wortspiel">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- Kopfzeile mit Titel und Schaltflächen -->
+    <header class="header">
+      <h1>Wortspiel</h1>
+      <div class="header-buttons">
+        <button type="button" id="help-toggle" class="icon-btn" aria-expanded="false" aria-controls="help">Anleitung</button>
+        <button type="button" id="stats-btn" class="icon-btn">Statistik</button>
+        <button type="button" id="new-game" class="primary-btn">Neues Spiel</button>
+      </div>
+    </header>
+
+    <!-- Ein- und ausblendbare Spielanleitung -->
+    <section id="help" class="help" hidden>
+      <h2>So wird gespielt</h2>
+      <p>Errate das gesuchte deutsche Wort mit <strong>5 Buchstaben</strong> in höchstens <strong>6 Versuchen</strong>.
+         Nach jedem Versuch zeigen die Felder, wie nah du dran warst:</p>
+      <ul class="legend">
+        <li><span class="tile legend-tile" data-state="correct">A</span> Richtiger Buchstabe an der richtigen Stelle (Symbol ✓)</li>
+        <li><span class="tile legend-tile" data-state="present">B</span> Buchstabe kommt vor, steht aber woanders (Symbol ↔)</li>
+        <li><span class="tile legend-tile" data-state="absent">C</span> Buchstabe kommt nicht im Wort vor (Symbol ✕)</li>
+      </ul>
+      <p>Eingabe per Bildschirmtastatur oder Tastatur (Buchstaben, Rücktaste, Enter). Umlaute und ß kommen nicht vor.</p>
+    </section>
+
+    <!-- Versuchsanzeige und Meldungen -->
+    <p id="attempt" class="attempt" aria-live="polite">Versuch 1 von 6</p>
+    <div id="message" class="message" role="status" aria-live="assertive"></div>
+
+    <!-- Spielfeld: Zeilen und Felder werden von script.js erzeugt -->
+    <main id="board" class="board" aria-label="Spielfeld"></main>
+
+    <!-- Ergebnis-Banner (Gewonnen / Verloren) -->
+    <div id="result" class="result" hidden></div>
+
+    <!-- Bildschirmtastatur (QWERTZ), wird von script.js erzeugt -->
+    <div id="keyboard" class="keyboard" aria-label="Bildschirmtastatur"></div>
+  </div>
+
+  <!-- Statistik-Dialog -->
+  <dialog id="stats-dialog" class="dialog" aria-labelledby="stats-title">
+    <h2 id="stats-title">Statistik</h2>
+    <dl class="stats-grid">
+      <div><dd id="stat-played">0</dd><dt>Gespielt</dt></div>
+      <div><dd id="stat-won">0</dd><dt>Gewonnen</dt></div>
+      <div><dd id="stat-rate">0 %</dd><dt>Gewinnquote</dt></div>
+      <div><dd id="stat-streak">0</dd><dt>Aktuelle Serie</dt></div>
+      <div><dd id="stat-best">0</dd><dt>Beste Serie</dt></div>
+    </dl>
+    <div class="dialog-buttons">
+      <button type="button" id="stats-reset" class="icon-btn danger">Statistik zurücksetzen</button>
+      <button type="button" id="stats-close" class="primary-btn">Schließen</button>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
