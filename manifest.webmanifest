@@ -2,7 +2,7 @@
   "name": "Wortspiel",
   "short_name": "Wortspiel",
   "lang": "de",
-  "start_url": "./index.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
